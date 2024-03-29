@@ -25,10 +25,8 @@ export class UserValidationPipe implements PipeTransform {
         isActive: Boolean(value.isActive),
       };
       const parsedValue = this.schema.parse(transformed);
-      console.log('pp', parsedValue);
       return parsedValue;
     } catch (error) {
-      console.error(error.errors);
       throw new BadRequestException(
         `Validation failed: ${error.errors[0].path}-${error.errors[0].message}`,
       );
