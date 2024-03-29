@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/users/user.entity';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { Users } from 'src/users/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -11,7 +12,8 @@ export class UsersService implements OnModuleInit {
   }
 
   constructor(
-    @InjectRepository(User) private usersRepository: Repository<User>,
+    @InjectRepository(Users)
+    private usersRepository: Repository<Users>,
   ) {}
 
   // private _user: User | null = null;
@@ -29,19 +31,24 @@ export class UsersService implements OnModuleInit {
   //   return this._user !== null ? this._user[attr] : null;
   // }
 
-  create(info: User) {
+  create(info: CreateUserDto) {
     return this.usersRepository.save(info);
   }
 
-  findOne(id: number): Promise<User | null> {
+  findOne(id: number): Promise<Users | null> {
     return this.usersRepository.findOneBy({ id });
   }
 
-  findAll(): Promise<User[]> {
+  findAll(): Promise<Users[]> {
     return this.usersRepository.find();
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+  async remove(id: number): Promise<{ code: number; message: string }> {
+    try {
+      await this.usersRepository.delete(id);
+      return { code: 200, message: 'deleted!' };
+    } catch (error) {
+      return { code: 400, message: 'failed!' };
+    }
   }
 }

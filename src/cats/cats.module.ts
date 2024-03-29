@@ -1,4 +1,6 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Cats } from 'src/cats/cat.entity';
 import { CatsController } from 'src/cats/cats.controller';
 import { CatsService } from 'src/cats/cats.service';
 // import { DevServerService } from './server/dev-server.service';
@@ -6,22 +8,21 @@ import { CatsService } from 'src/cats/cats.service';
 // import { serverProvider } from './server/server.provider';
 // import mockCatsService from './mock-cats.service';
 
-@Global()
 @Module({
+  imports: [TypeOrmModule.forFeature([Cats])],
   controllers: [CatsController],
   providers: [
+    CatsService,
+    //INFO Mock Server
     // serverProvider,
     // DevServerService,
     // ProdServerService,
-    CatsService,
-    // default
-    /**CatsService,*/
-    // Mock service example
+    //INFO Mock Service 예시
     /**{
       provide: CatsService,
-    useValue: mockCatsService // mock 서비스
+    useValue: mockCatsService
     },*/
   ],
-  exports: [CatsService],
+  exports: [CatsService, TypeOrmModule],
 })
 export class CatsModule {}

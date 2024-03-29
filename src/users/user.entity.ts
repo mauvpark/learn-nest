@@ -2,8 +2,8 @@ import { Photo } from 'src/photos/photo.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
+export class Users {
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()

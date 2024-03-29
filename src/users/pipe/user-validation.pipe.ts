@@ -12,7 +12,6 @@ export class UserValidationPipe implements PipeTransform {
 
   transform(
     value: {
-      id: string;
       firstName: string;
       lastName: string;
       isActive: boolean;
@@ -23,10 +22,10 @@ export class UserValidationPipe implements PipeTransform {
       console.log('before trans', value);
       const transformed: UserType = {
         ...value,
-        id: parseInt(value.id),
         isActive: Boolean(value.isActive),
       };
       const parsedValue = this.schema.parse(transformed);
+      console.log('pp', parsedValue);
       return parsedValue;
     } catch (error) {
       console.error(error.errors);

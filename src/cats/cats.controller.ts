@@ -38,7 +38,6 @@ export class CatsController {
   @UseInterceptors(TransformInterceptor)
   @UsePipes(new ZodValidationPipe(createCatSchema))
   async create(@Body() createCatDto: CreateCatDto) {
-    console.log('dto', createCatDto);
     return this.catsService.create(createCatDto);
   }
 

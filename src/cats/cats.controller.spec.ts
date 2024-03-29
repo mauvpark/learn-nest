@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
-import { Cat } from 'src/cats/interface/cat.interface';
 // import { serverProvider } from 'src/cats/server/server.provider';
+import { MockFunctionMetadata, ModuleMocker } from 'jest-mock';
+import { Cats } from 'src/cats/cat.entity';
 import { CatsController } from './cats.controller';
 import { CatsService } from './cats.service';
-import { MockFunctionMetadata, ModuleMocker } from 'jest-mock';
 
 const moduleMocker = new ModuleMocker(global);
 
@@ -42,8 +42,8 @@ describe('CatsController', () => {
 
   describe('findAll', () => {
     it('should return an array of cats', async () => {
-      const result: Cat[] = [{ name: 'Mat', breed: 'Ragdoll', age: 2 }];
-      jest.spyOn(catsService, 'findAll').mockImplementation(() => result);
+      const result: Cats[] = [{ id: 1, name: 'Mat', breed: 'Ragdoll', age: 2 }];
+      jest.spyOn(catsService, 'findAll').mockImplementation(async () => result);
 
       expect(await catsController.findAll()).toBe(result);
     });

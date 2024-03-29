@@ -10,12 +10,14 @@ export class ZodValidationPipe implements PipeTransform {
   constructor(private schema: ZodSchema<CreateCatDto>) {}
 
   transform(
-    value: { name: string; age: string; breed: string },
+    value: { id: string; name: string; age: string; breed: string },
     metadata: ArgumentMetadata,
   ) {
     try {
-      console.log('metadata', metadata);
-      const transformed = { ...value, age: parseInt(value.age) };
+      const transformed = {
+        ...value,
+        age: parseInt(value.age),
+      };
       const parsedValue = this.schema.parse(transformed);
       return parsedValue;
     } catch (error) {
