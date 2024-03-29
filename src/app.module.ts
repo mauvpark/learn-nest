@@ -20,7 +20,7 @@ import configuration from 'src/config/configuration';
 // import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { User } from 'src/users/entity/user.entity';
+import { User } from 'src/users/user.entity';
 
 // const configServiceProvider = {
 //   provide: ConfigService, // 실제 실행은 useClass에서 실행되고 provide의 class는 토큰 기능만 함
@@ -32,8 +32,8 @@ import { User } from 'src/users/entity/user.entity';
 
 @Module({
   imports: [
-    DevtoolsModule.register({ http: process.env.NODE_ENV !== 'production' }), // 유료 라이센스만 사용 가능
     CatsModule,
+    DevtoolsModule.register({ http: process.env.NODE_ENV !== 'production' }), // 유료 라이센스만 사용 가능
     UsersModule,
     AuthModule,
     ConfigModule.forRoot({
@@ -57,6 +57,7 @@ import { User } from 'src/users/entity/user.entity';
       //   abortEarly: true,
       // },
     }),
+    //BUG TypeOrm 0.3.20 버전은 여러 모듈이 있을 경우, 일부 모듈에서 Request를 받지 못하는 버그가 있음. 따라서 현재는 0.3.19 버전을 사용하기를 권장하고 있음.
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -90,6 +91,6 @@ export class AppModule implements NestModule {
   }
 
   constructor(private dataSource: DataSource) {
-    console.log('datasource', dataSource);
+    // console.log('datasource', dataSource);
   }
 }

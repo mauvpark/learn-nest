@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
-import { CatsController } from './cats.controller';
-import { CatsService } from './cats.service';
+import { CatsController } from 'src/cats/cats.controller';
+import { CatsService } from 'src/cats/cats.service';
 // import { DevServerService } from './server/dev-server.service';
 // import { ProdServerService } from './server/prod-server.service';
 // import { serverProvider } from './server/server.provider';

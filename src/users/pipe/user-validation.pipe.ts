@@ -20,7 +20,7 @@ export class UserValidationPipe implements PipeTransform {
     metadata: ArgumentMetadata,
   ) {
     try {
-      console.log('metadata', metadata);
+      console.log('before trans', value);
       const transformed: UserType = {
         ...value,
         id: parseInt(value.id),

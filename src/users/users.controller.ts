@@ -9,7 +9,6 @@ import {
   Post,
   // UseInterceptors,
   UsePipes,
-  // ValidationPipe,
 } from '@nestjs/common';
 // import { User as UserDecorator } from 'src/users/decorator/user.decorator';
 import { CreateUserDto, createUserSchema } from 'src/users/dto/create-user.dto';

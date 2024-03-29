@@ -6,6 +6,7 @@ export class AuthService {
   constructor(private userService: UsersService) {}
 
   get user() {
-    return this.userService.user;
+    // return this.userService.user;
+    return null;
   }
 }
