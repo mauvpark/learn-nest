@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Photo {
+export class UserImageEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -9,5 +9,5 @@ export class Photo {
   url: string;
 
   @Column()
-  masterId: number;
+  userId: number;
 }

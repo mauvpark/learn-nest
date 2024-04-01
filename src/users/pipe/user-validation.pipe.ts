@@ -3,21 +3,14 @@ import {
   BadRequestException,
   PipeTransform,
 } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UserType } from 'src/users/interface/user.interface';
+import { CreateUserDto } from 'src/users/model/dto/user.dto';
+import { UserType } from 'src/users/model/interface/user.interface';
 import { ZodSchema } from 'zod';
 
 export class UserValidationPipe implements PipeTransform {
   constructor(private schema: ZodSchema<CreateUserDto>) {}
 
-  transform(
-    value: {
-      firstName: string;
-      lastName: string;
-      isActive: boolean;
-    },
-    metadata: ArgumentMetadata,
-  ) {
+  transform(value: Omit<UserType, 'id'>, metadata: ArgumentMetadata) {
     try {
       console.log('before trans', value);
       const transformed: UserType = {

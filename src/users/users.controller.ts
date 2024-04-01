@@ -11,7 +11,7 @@ import {
   UsePipes,
 } from '@nestjs/common';
 // import { User as UserDecorator } from 'src/users/decorator/user.decorator';
-import { CreateUserDto, createUserSchema } from 'src/users/dto/create-user.dto';
+import { CreateUserDto, createUserSchema } from 'src/users/model/dto/user.dto';
 // import { ExcludeNullInterceptor } from 'src/users/interceptor/exclude-null.interceptor';
 // import { TimeoutInterceptor } from 'src/users/interceptor/timeout.interceptor';
 // import { UserType } from 'src/users/interface/user.interface';

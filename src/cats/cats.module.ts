@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Cats } from 'src/cats/cat.entity';
+import { CatEntity } from 'src/cats/model/entity/cat.entity';
 import { CatsController } from 'src/cats/cats.controller';
 import { CatsService } from 'src/cats/cats.service';
 // import { DevServerService } from './server/dev-server.service';
@@ -9,7 +9,7 @@ import { CatsService } from 'src/cats/cats.service';
 // import mockCatsService from './mock-cats.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Cats])],
+  imports: [TypeOrmModule.forFeature([CatEntity])],
   controllers: [CatsController],
   providers: [
     CatsService,

@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { Users } from 'src/users/user.entity';
+import { CreateUserDto } from 'src/users/model/dto/user.dto';
+import { UserEntity } from 'src/users/model/entity/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -12,8 +12,8 @@ export class UsersService implements OnModuleInit {
   }
 
   constructor(
-    @InjectRepository(Users)
-    private usersRepository: Repository<Users>,
+    @InjectRepository(UserEntity)
+    private usersRepository: Repository<UserEntity>,
   ) {}
 
   // private _user: User | null = null;
@@ -35,11 +35,11 @@ export class UsersService implements OnModuleInit {
     return this.usersRepository.save(info);
   }
 
-  findOne(id: number): Promise<Users | null> {
+  findOne(id: number): Promise<UserEntity | null> {
     return this.usersRepository.findOneBy({ id });
   }
 
-  findAll(): Promise<Users[]> {
+  findAll(): Promise<UserEntity[]> {
     return this.usersRepository.find();
   }
 

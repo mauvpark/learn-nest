@@ -21,3 +21,10 @@ export class ClassCreateCatDto {
   @IsString()
   breed: string;
 }
+
+export class UpdateCatDto {
+  id: number;
+  name: string;
+  age: number;
+  breed: string;
+}

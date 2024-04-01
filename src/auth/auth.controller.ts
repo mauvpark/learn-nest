@@ -9,7 +9,7 @@ import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
 import { ExcludeNullInterceptor } from 'src/users/interceptor/exclude-null.interceptor';
 import { TimeoutInterceptor } from 'src/users/interceptor/timeout.interceptor';
 import { User as UserDecorator } from 'src/users/decorator/user.decorator';
-import { UserType } from 'src/users/interface/user.interface';
+import { UserType } from 'src/users/model/interface/user.interface';
 
 @Controller('auth')
 @UseInterceptors(LoggingInterceptor)

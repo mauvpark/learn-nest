@@ -14,7 +14,11 @@ import {
   UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
-import { CreateCatDto, createCatSchema } from 'src/cats/dto/create-cat.dto';
+import {
+  CreateCatDto,
+  createCatSchema,
+  UpdateCatDto,
+} from 'src/cats/model/dto/cat.dto';
 import { TransformInterceptor } from 'src/cats/interceptor/transform.interceptor';
 import { ZodValidationPipe } from 'src/common/pipe/zod-validation.pipe';
 import { Roles } from 'src/users/decorator/roles.decorator';
@@ -23,8 +27,7 @@ import { HttpExceptionFilter } from '../common/filter/http-exception.filter';
 import { ExcludeNullInterceptor } from '../common/interceptor/exclude-null.interceptor';
 import { LoggingInterceptor } from '../common/interceptor/logging.interceptor';
 import { CatsService } from './cats.service';
-import { UpdateCatDto } from './dto/update-cat.dto';
-import { Cat } from './interface/cat.interface';
+import { Cat } from './model/interface/cat.interface';
 
 @Controller('cats')
 // @UseGuards(RolesGuard)

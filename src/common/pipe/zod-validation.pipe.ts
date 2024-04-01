@@ -3,7 +3,7 @@ import {
   BadRequestException,
   PipeTransform,
 } from '@nestjs/common';
-import { CreateCatDto } from 'src/cats/dto/create-cat.dto';
+import { CreateCatDto } from 'src/cats/model/dto/cat.dto';
 import { ZodSchema } from 'zod';
 
 export class ZodValidationPipe implements PipeTransform {

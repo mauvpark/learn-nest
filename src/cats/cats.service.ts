@@ -2,8 +2,8 @@ import { Injectable, Scope } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LazyModuleLoader, ModuleRef } from '@nestjs/core';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Cats } from 'src/cats/cat.entity';
-import { CreateCatDto } from 'src/cats/dto/create-cat.dto';
+import { CatEntity } from 'src/cats/model/entity/cat.entity';
+import { CreateCatDto } from 'src/cats/model/dto/cat.dto';
 import { Repository } from 'typeorm';
 
 @Injectable({ scope: Scope.REQUEST, durable: true })
@@ -18,7 +18,7 @@ export class CatsService {
     private moduleRef: ModuleRef,
     private lazyModuleLoader: LazyModuleLoader,
     private configService: ConfigService,
-    @InjectRepository(Cats) private catsRepository: Repository<Cats>,
+    @InjectRepository(CatEntity) private catsRepository: Repository<CatEntity>,
   ) {
     // console.log('ref', moduleRef.get(DevServerService));
     //INFO ENV 파일 database host로 연동한다고 가정
@@ -45,7 +45,7 @@ export class CatsService {
     return this.catsRepository.findOneBy({ id });
   }
 
-  findAll(): Promise<Cats[]> {
+  findAll(): Promise<CatEntity[]> {
     return this.catsRepository.find();
   }
 
