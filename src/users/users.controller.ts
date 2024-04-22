@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
@@ -7,11 +6,14 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Req,
+  UseInterceptors,
   // UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
+import { CreateUserInterceptor } from 'src/users/interceptor/create-user.interceptor';
 // import { User as UserDecorator } from 'src/users/decorator/user.decorator';
-import { CreateUserDto, createUserSchema } from 'src/users/model/dto/user.dto';
+import { createUserSchema } from 'src/users/model/dto/user.dto';
 // import { ExcludeNullInterceptor } from 'src/users/interceptor/exclude-null.interceptor';
 // import { TimeoutInterceptor } from 'src/users/interceptor/timeout.interceptor';
 // import { UserType } from 'src/users/interface/user.interface';
@@ -24,8 +26,9 @@ export class UsersController {
 
   @Post()
   @UsePipes(new UserValidationPipe(createUserSchema))
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  @UseInterceptors(CreateUserInterceptor)
+  async create(@Req() req: Request) {
+    return this.usersService.create(req);
   }
 
   @Get()
