@@ -31,6 +31,11 @@ export class UsersController {
     return this.usersService.create(req);
   }
 
+  @Post('/many')
+  async createMany(@Req() req: Request) {
+    return this.usersService.createMany(req);
+  }
+
   @Get()
   async findAll() {
     return this.usersService.findAll();

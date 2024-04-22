@@ -1,6 +1,7 @@
 import { UserImageEntity } from 'src/users/model/entity/user-image.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+// INFO 기타-Schema 방식: https://docs.nestjs.com/techniques/database#separating-entity-definition
 @Entity()
 export class UserEntity {
   @PrimaryGeneratedColumn('increment')

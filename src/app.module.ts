@@ -10,19 +10,16 @@ import { LoggerMiddleware } from 'src/common/middleware/logger.middlware';
 // import { ConfigService } from 'src/config/config.service';
 // import { DevelopmentConfigService } from 'src/config/development-config.service';
 // import { ProductionConfigService } from 'src/config/production-config.service';
+import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 import { AppController } from './app.controller';
-import { AuthModule } from 'src/auth/auth.module';
 // import { ConfigModule } from 'src/config/config.module';
-import { AppService } from 'src/app.service';
 import { ConfigModule } from '@nestjs/config';
+import { AppService } from 'src/app.service';
 import configuration from 'src/config/configuration';
 // import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { UserEntity } from 'src/users/model/entity/user.entity';
-import { CatEntity } from 'src/cats/model/entity/cat.entity';
-import { UserImageEntity } from 'src/users/model/entity/user-image.entity';
 
 // const configServiceProvider = {
 //   provide: ConfigService, // 실제 실행은 useClass에서 실행되고 provide의 class는 토큰 기능만 함
@@ -67,7 +64,8 @@ import { UserImageEntity } from 'src/users/model/entity/user-image.entity';
       username: 'root',
       password: 'root',
       database: 'test',
-      entities: [UserEntity, CatEntity, UserImageEntity],
+      // entities: [UserEntity, CatEntity, UserImageEntity],
+      autoLoadEntities: true,
       synchronize: true, //WARN production에서는 사용해서는 안됨.
     }),
     //INFO 아래는 Custom config module
