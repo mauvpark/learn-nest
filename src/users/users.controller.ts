@@ -1,3 +1,4 @@
+import { CacheInterceptor } from '@nestjs/cache-manager';
 import {
   Controller,
   Delete,
@@ -21,6 +22,7 @@ import { UserValidationPipe } from 'src/users/pipe/user-validation.pipe';
 import { UsersService } from 'src/users/users.service';
 
 @Controller('user')
+@UseInterceptors(CacheInterceptor)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 

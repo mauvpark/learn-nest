@@ -20,6 +20,7 @@ import configuration from 'src/config/configuration';
 // import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { CacheModule } from '@nestjs/cache-manager';
 
 // const configServiceProvider = {
 //   provide: ConfigService, // 실제 실행은 useClass에서 실행되고 provide의 class는 토큰 기능만 함
@@ -78,6 +79,7 @@ import { DataSource } from 'typeorm';
     //   },
     //   inject: [...]
     // })
+    CacheModule.register({ isGlobal: true }),
   ],
   controllers: [AppController],
   // providers: [configServiceProvider],
