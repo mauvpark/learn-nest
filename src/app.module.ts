@@ -21,6 +21,8 @@ import configuration from 'src/config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksService } from 'src/common/schedule/tasks-service.schedule';
 
 // const configServiceProvider = {
 //   provide: ConfigService, // 실제 실행은 useClass에서 실행되고 provide의 class는 토큰 기능만 함
@@ -80,10 +82,11 @@ import { CacheModule } from '@nestjs/cache-manager';
     //   inject: [...]
     // })
     CacheModule.register({ isGlobal: true }),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   // providers: [configServiceProvider],
-  providers: [AppService],
+  providers: [AppService, TasksService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
