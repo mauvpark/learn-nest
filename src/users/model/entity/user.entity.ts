@@ -20,9 +20,4 @@ export class UserEntity {
   // INFO 자신의 table에서 정의하고자 하는 column명, 타겟 entity 그리고 image table에서 역으로 user table에 접근할 수 있는 inverse relation
   @OneToMany(() => UserImageEntity, (image) => image.user)
   images: UserImageEntity[];
-
-  constructor(partial: Partial<UserEntity>) {
-    console.log('partial', partial);
-    Object.assign(this, partial);
-  }
 }

@@ -8,6 +8,7 @@ import {
   ParseIntPipe,
   Post,
   Req,
+  Res,
   UseInterceptors,
   // UseInterceptors,
   UsePipes,
@@ -38,8 +39,14 @@ export class UsersController {
     return this.usersService.createMany(req);
   }
 
+  // INFO signedCookie 사용 방법
+  // 관련 내용: https://stackoverflow.com/a/11898142
   @Get()
   async findAll() {
+    // ) // @Res() res // @Req() req, // (
+    // console.log('cookies', req.signedCookies);
+    // res.cookie('mysign', 'mycookie', { signed: true });
+    // res.end();
     return this.usersService.findAll();
   }
 
