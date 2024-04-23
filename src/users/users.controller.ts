@@ -8,7 +8,6 @@ import {
   ParseIntPipe,
   Post,
   Req,
-  Res,
   UseInterceptors,
   // UseInterceptors,
   UsePipes,
@@ -39,7 +38,7 @@ export class UsersController {
     return this.usersService.createMany(req);
   }
 
-  // INFO signedCookie 사용 방법
+  // INFO signedCookie: 쿠키가 사용자에 의해 변경 되었는지를 시그니처를 통해 확인하는 절차를 거침.
   // 관련 내용: https://stackoverflow.com/a/11898142
   @Get()
   async findAll() {
