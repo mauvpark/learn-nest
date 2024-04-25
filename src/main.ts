@@ -24,6 +24,7 @@ async function bootstrap() {
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.get(LazyModuleLoader);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
+  app.enableCors({ origin: ['*'] });
   // app.use(cookieParser('mysecret', {}));
   // app.useBodyParser('json'); // 다른 BodyParser 옵션을 쓸 경우
   // app.useGlobalFilters(new HttpExceptionFilter());
