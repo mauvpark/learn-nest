@@ -18,11 +18,14 @@ export class ExcludeNullInterceptor implements NestInterceptor {
         value === null
           ? {
               data: {
+                id: 0,
+                email: '',
+                password: '',
                 firstName: '',
                 lastName: '',
-                id: 0,
                 isActive: false,
                 images: [],
+                iv: '',
               },
             }
           : { data: value },

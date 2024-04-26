@@ -1,31 +1,37 @@
-import {
-  Controller,
-  Get,
-  UseInterceptors,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Get, Post, Req, UseInterceptors } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
-import { ExcludeNullInterceptor } from 'src/users/interceptor/exclude-null.interceptor';
 import { TimeoutInterceptor } from 'src/users/interceptor/timeout.interceptor';
-import { User as UserDecorator } from 'src/users/decorator/user.decorator';
-import { UserType } from 'src/users/model/interface/user.interface';
 
 @Controller('auth')
 @UseInterceptors(LoggingInterceptor)
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Get()
-  @UseInterceptors(ExcludeNullInterceptor)
+  @Post('/signUp')
   @UseInterceptors(TimeoutInterceptor)
-  async findUser(
-    @UserDecorator(
-      'attr',
-      new ValidationPipe({ validateCustomDecorators: true }),
-    )
-    attr: string,
-  ): Promise<UserType | null | string> {
-    return attr ?? this.authService.user;
+  async signUp(@Req() req) {
+    const result = await this.authService.signUp(req);
+
+    return result;
   }
+
+  @Get('/signIn')
+  async signIn(@Req() req) {
+    const result = await this.authService.signIn(req);
+
+    return result;
+  }
+  // @Get()
+  // @UseInterceptors(ExcludeNullInterceptor)
+  // @UseInterceptors(TimeoutInterceptor)
+  // async findUser(
+  //   @UserDecorator(
+  //     'attr',
+  //     new ValidationPipe({ validateCustomDecorators: true }),
+  //   )
+  //   attr: string,
+  // ): Promise<UserType | null | string> {
+  //   return attr ?? this.authService.user;
+  // }
 }

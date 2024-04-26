@@ -49,16 +49,16 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  async findOne(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ) {
-    return this.usersService.findOne(id);
-  }
+  // @Get(':id')
+  // async findOne(
+  //   @Param(
+  //     'id',
+  //     new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+  //   )
+  //   id: number,
+  // ) {
+  //   return this.usersService.findOne(id);
+  // }
 
   @Delete(':id')
   async delete(

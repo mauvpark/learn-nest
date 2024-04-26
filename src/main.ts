@@ -8,7 +8,7 @@ import { AppModule } from './app.module';
 import { AllExceptionsFilter } from 'src/common/filter/all-exception.filter';
 import { AggregateByTenantContextIdStrategy } from 'src/aggregate-by-tenant-context-id.strategy';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as cookieParser from 'cookie-parser';
+// import * as cookieParser from 'cookie-parser';
 // import { HttpExceptionFilter } from 'src/common/filter/http-exception.filter';
 
 async function bootstrap() {

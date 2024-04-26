@@ -75,10 +75,10 @@ export class UsersService implements OnModuleInit {
     }
   }
 
-  async findOne(id: number) {
+  async findOne(email: string) {
     // : Promise<(UserEntity & { images: UserImageEntity[] }) | null>
     const user = await this.usersRepository.find({
-      where: { id },
+      where: { email },
       relations: { images: true }, // INFO relations를 통해 table을 join하면 타겟 entity를 참고하여 자신의 entity에서 정의한 column에 데이터를 붙인 뒤 반환
     });
     return user;
