@@ -16,7 +16,8 @@ export class CreateUserInterceptor implements NestInterceptor {
   ): Observable<UserType> {
     const req = context.switchToHttp().getRequest();
     const body: UserType = req.body;
-    const reject = !body?.firstName || !body?.lastName;
+    const reject =
+      !body?.email || !body?.password || !body?.firstName || !body?.lastName;
 
     if (!reject) {
       return next.handle();

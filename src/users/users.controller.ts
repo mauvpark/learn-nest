@@ -6,19 +6,16 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Req,
   UseInterceptors,
-  // UseInterceptors,
-  UsePipes,
 } from '@nestjs/common';
-import { CreateUserInterceptor } from 'src/users/interceptor/create-user.interceptor';
+import { Request } from 'express';
 // import { User as UserDecorator } from 'src/users/decorator/user.decorator';
-import { createUserSchema } from 'src/users/model/dto/user.dto';
 // import { ExcludeNullInterceptor } from 'src/users/interceptor/exclude-null.interceptor';
 // import { TimeoutInterceptor } from 'src/users/interceptor/timeout.interceptor';
 // import { UserType } from 'src/users/interface/user.interface';
-import { UserValidationPipe } from 'src/users/pipe/user-validation.pipe';
 import { UsersService } from 'src/users/users.service';
 
 @Controller('user')
@@ -26,11 +23,10 @@ import { UsersService } from 'src/users/users.service';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post()
-  @UsePipes(new UserValidationPipe(createUserSchema))
-  @UseInterceptors(CreateUserInterceptor)
+  @Patch('/profile')
+  // @UsePipes(new UserValidationPipe(createUserSchema))
   async create(@Req() req: Request) {
-    return this.usersService.create(req);
+    return this.usersService.patchProfile(req);
   }
 
   @Post('/many')

@@ -7,7 +7,7 @@
 
 ## Description
 
-Nest js 테스트 & 학습 리포지토리
+Nest js test & learning respository.
 
 ## Installation
 
@@ -30,6 +30,12 @@ $ yarn run start:prod
 
 ## Updates
 
-2024-04-29 Logic for issuing jwt access token.
+2024-04-29
 
-2024-04-26 Encryption, decryption logic.
+- Added a logic for issuing jwt access token.
+- Added a simple immutable variable.
+- Added a logic for profile images.
+
+2024-04-26
+
+- Added Encryption, decryption logic.

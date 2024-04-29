@@ -109,6 +109,10 @@ export class AuthService {
           );
           if (password === decryptedPassword.toString()) {
             const responseData = {
+              id: Buffer.from(
+                (targetUser.id.toString() + process.env.ID_SALT) as string,
+                'utf-8',
+              ).toString('base64'), // 암호화
               email: targetUser.email,
               firstName: targetUser.firstName,
               lastName: targetUser.lastName,
