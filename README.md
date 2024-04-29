@@ -32,4 +32,4 @@ $ yarn run start:prod
 
 2024-04-29 Logic for issuing jwt access token.
 
-2024-04-26 Encrypt, decrypt logic.
+2024-04-26 Encryption, decryption logic.
