@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Req, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
+import { Response } from 'express';
 import { AuthService } from 'src/auth/auth.service';
 import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
 import { TimeoutInterceptor } from 'src/users/interceptor/timeout.interceptor';
@@ -10,17 +18,17 @@ export class AuthController {
 
   @Post('/signUp')
   @UseInterceptors(TimeoutInterceptor)
-  async signUp(@Req() req) {
+  async signUp(@Req() req: Request) {
     const result = await this.authService.signUp(req);
 
     return result;
   }
 
   @Get('/signIn')
-  async signIn(@Req() req) {
-    const result = await this.authService.signIn(req);
-
-    return result;
+  async signIn(@Req() req: Request, @Res() res: Response) {
+    const accessToken = await this.authService.signIn(req);
+    res.setHeader('Authorization', `Bearer ${accessToken}`);
+    res.send({ message: 'Login Success!', status: 200 });
   }
   // @Get()
   // @UseInterceptors(ExcludeNullInterceptor)

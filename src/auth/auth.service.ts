@@ -5,14 +5,16 @@ import {
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
-import { createCipheriv, createDecipheriv, randomBytes, scrypt } from 'crypto';
-import { promisify } from 'util';
-import 'dotenv/config';
-import { UserType } from 'src/users/model/interface/user.interface';
 import { InjectRepository } from '@nestjs/typeorm';
+import { createCipheriv, createDecipheriv, randomBytes, scrypt } from 'crypto';
+import 'dotenv/config';
+import { readFileSync } from 'fs';
+import jwt from 'jsonwebtoken';
 import { UserEntity } from 'src/users/model/entity/user.entity';
+import { UserType } from 'src/users/model/interface/user.interface';
+import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
+import { promisify } from 'util';
 
 const iv = randomBytes(Number(process.env.PASSWORD_IV_BYTES as string)); // 서버 저장
 
@@ -94,7 +96,7 @@ export class AuthService {
     }
   }
 
-  async signIn(@Req() req) {
+  async signIn(@Req() req: Request) {
     const body = req.body as unknown as { email?: string; password?: string };
     try {
       if (body?.email && body?.password) {
@@ -106,8 +108,23 @@ export class AuthService {
             targetUser.iv,
           );
           if (password === decryptedPassword.toString()) {
-            // TODO JWT 토큰 발급
-            return { message: 'Login Success!', status: 200, token: '' };
+            const responseData = {
+              email: targetUser.email,
+              firstName: targetUser.firstName,
+              lastName: targetUser.lastName,
+              images: targetUser?.images ?? [],
+            };
+            const privateKey = readFileSync('private.key').toString();
+            // INFO Refresh token 사용 시 참고 사항
+            // 액세스 토큰 만료 확인
+            // 리프레시 토큰 사용
+            // 서버 검증
+            // 새 엑세스 토큰 발급
+            // 클라이언트 업데이트
+            const accessToken = jwt.sign({ data: responseData }, privateKey, {
+              expiresIn: Number(process.env.LOGOUT_EXPIRE_TIME),
+            });
+            return accessToken;
           }
           throw new UnauthorizedException();
         }
