@@ -28,15 +28,7 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+## Updates
 
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
+2024-04-29 Logic for issuing jwt access token.
+2024-04-26 Encrypt, decrypt logic.
